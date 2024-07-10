@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules/
+
+# TypeScript compiled output
+lib/
+dist/
+
+# Logging files
+*.log
+
+# Environment files
+.env
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
