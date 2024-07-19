@@ -15,13 +15,12 @@ import type {
     Storage,
 } from '@launchdarkly/js-client-sdk-common';
 
-import { name, version } from '../../package.json';
-//   import ReactEventSource from '../fromExternal/react-sse';
+import data from '../../package.json';
+import ReactEventSource from '../fromExternal/react-sse';
 import { btoa } from '../polyfills';
-import { ldApplication, ldDevice } from './autoEnv';
-import LocalStorage from './ConditionalAsyncStorage';
+import { ldApplication, ldEnv, ldContext } from './autoEnv';
 import PlatformCrypto from './crypto';
-
+const  { name, version } = data
 export class PlatformRequests implements Requests {
     eventSource?: ReactEventSource<EventName>;
 
@@ -56,7 +55,8 @@ class PlatformInfo implements Info {
         const data = {
             name: 'React Web App',
             ld_application: ldApplication,
-            ld_device: ldDevice,
+            ld_device: ldEnv,
+            ldContext: ldContext
         };
 
         this.logger.debug(`platformData: ${JSON.stringify(data, null, 2)}`);
@@ -65,9 +65,8 @@ class PlatformInfo implements Info {
 
     sdkData(): SdkData {
         const data = {
-            name,
-            version,
-            userAgentBase: 'WebClient',
+            name: name,
+            version: version
         };
 
         this.logger.debug(`sdkData: ${JSON.stringify(data, null, 2)}`);
@@ -86,7 +85,7 @@ class PlatformStorage implements Storage {
             const value = localStorage.getItem(key);
             return value ?? null;
         } catch (error) {
-            this.logger.debug(`Error getting AsyncStorage key: ${key}, error: ${error}`);
+            this.logger.error(`Error getting AsyncStorage key: ${key}, error: ${error}`);
             return null;
         }
     }
@@ -95,7 +94,7 @@ class PlatformStorage implements Storage {
         try {
             localStorage.setItem(key, value);
         } catch (error) {
-            this.logger.debug(`Error saving AsyncStorage key: ${key}, value: ${value}, error: ${error}`);
+            this.logger.error(`Error saving AsyncStorage key: ${key}, value: ${value}, error: ${error}`);
         }
     }
 }

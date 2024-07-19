@@ -1,19 +1,24 @@
-export const ldApplication = {
+
+import type {LDApplication, LDDevice, LDContext} from '@launchdarkly/js-client-sdk-common';
+import locale from './locale';
+export const ldApplication: LDApplication = {
     key: '',
     envAttributesVersion: '1.0',
-    locale: navigator.language,
+    locale,
     id: '',
     name: '',
     version: '',
     versionName: '',
 };
 
-export const ldDevice = {
+export const ldEnv: LDDevice = {
     key: '',
     envAttributesVersion: '1.0',
-    os: {
-        family: navigator.platform,
-        name: navigator.appName,
-        version: navigator.appVersion,
-    },
 };
+
+export const ldContext: LDContext = {
+    kind:"",
+    key:''
+}
+
+

@@ -24,6 +24,7 @@ import createPlatform from './platform';
  * ```
  */
 export default class ReactLDClient extends LDClientImpl {
+  clientSideID: string;
   /**
    * Creates an instance of the LaunchDarkly client.
    *
@@ -34,7 +35,6 @@ export default class ReactLDClient extends LDClientImpl {
    * for more documentation.
    * @param options {@link LDOptions} to initialize the client with.
    */
-  private clientSideID: string;
   constructor(clientSideID: string, autoEnvAttributes: AutoEnvAttributes, options: LDOptions = {}) {
     const { logger: customLogger, debug } = options;
     const logger =
@@ -64,4 +64,6 @@ export default class ReactLDClient extends LDClientImpl {
   override createStreamUriPath(context: LDContext) {
     return `/eval/${this.clientSideID}/${base64UrlEncode(JSON.stringify(context), this.platform.encoding!)}`;
   }
+
+
 }

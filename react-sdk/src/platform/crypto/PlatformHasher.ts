@@ -1,6 +1,6 @@
 import { Hasher as LDHasher } from '@launchdarkly/js-client-sdk-common';
 
-import { Hasher, sha256 } from '../../fromExternal/js-sha256';
+import { Hasher, sha256 } from 'js-sha256';
 import { base64FromByteArray } from '../../polyfills';
 import { SupportedHashAlgorithm, SupportedOutputEncoding } from './types';
 
