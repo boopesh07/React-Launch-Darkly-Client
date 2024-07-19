@@ -12,7 +12,7 @@ import createPlatform from './platform';
 
 /**
  * The React LaunchDarkly client. Instantiate this class to create an
- * instance of the ReactLDClient and pass it to the {@link LDProvider}.
+ * instance of the ReactLDClient and pass it to the {@link LDProvider}
  *
  * @example
  * ```tsx
